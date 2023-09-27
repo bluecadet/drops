@@ -50,9 +50,11 @@ switch (argv['v']) {
 }
 
 if (!semver.valid(new_version)) {
-  console.error("new_Version is not semantically correct: " + new_version);
+  console.error("Version is not semantically correct: " + new_version);
   process.exit(1);
 }
+
+console.log("Setting new Version: " + new_version);
 
 let bldMsg = "# Information added by packaging script on " + date.format(now, 'YYYY-MM-DD') + "\r\n";
 bldMsg += "version: " + new_version + "\r\n";
@@ -80,6 +82,7 @@ infoFiles.forEach((filename) => {
       data = data.substring(0, index) + bldMsg;
     }
 
+    console.log("Updateing " + filename);
     fs.writeFile(filename, data, { flag: 'w+' }, err => {
       if (err) console.log(err);
     });
@@ -87,8 +90,13 @@ infoFiles.forEach((filename) => {
 
 });
 
+console.log("Updateing package.json");
+exec("npm version --no-commit-hooks --no-git-tag-version " + new_version);
 
 if (argv['c']) {
+
+  console.log("Attempting to commit changes.");
+
   commandExists('git', function(err, commandExists) {
     if (commandExists) {
       // git tag new_version
