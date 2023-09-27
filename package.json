@@ -1,0 +1,31 @@
+{
+  "name": "@bluecadet/drops",
+  "version": "1.0.0-alpha1",
+  "description": "NodeJS tools to help building Drupal custom modules for Bluecadet.",
+  "main": "index.js",
+  "bin": {
+    "set-version": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "contributors": [
+    "Pete Inge <pinge@bluecadet.com>"
+  ],
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluecadet/drops.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bluecadet/drops/issues"
+  },
+  "homepage": "https://github.com/bluecadet/drops#readme",
+  "dependencies": {
+    "command-exists": "^1.2.9",
+    "date-and-time": "^3.0.3",
+    "semver": "^7.5.4",
+    "yargs": "^17.7.2"
+  }
+}
