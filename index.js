@@ -66,8 +66,10 @@ fromDir('./', /\.info.yml$/, function(filename) {
   infoFiles.push(filename);
 });
 
+let writes = [];
+
 infoFiles.forEach((filename) => {
-  fs.readFile(filename, 'utf8', (err, data) => {
+  let p = fs.readFile(filename, 'utf8', (err, data) => {
     if (err) {
       console.error(err);
       return;
@@ -87,26 +89,33 @@ infoFiles.forEach((filename) => {
       if (err) console.log(err);
     });
   });
-
+  writes.push(p);
 });
 
-console.log("Updateing package.json");
-exec("npm version --no-commit-hooks --no-git-tag-version " + new_version);
+Promise.all(writes).then(() => {
+  console.log("Updateing package.json");
+  let njs = exec("npm version --no-commit-hooks --no-git-tag-version " + new_version, execCallback);
 
-if (argv['c']) {
+  njs.on('exit', function () {
 
-  console.log("Attempting to commit changes.");
+    console.log("Finished package.json");
 
-  commandExists('git', function(err, commandExists) {
-    if (commandExists) {
-      // git tag new_version
-      exec("git add . && git commit -m \"Changing version to " + new_version + "\" && git tag  " + new_version, execCallback);
-    }
-    if (err) {
-      console.error(err);
+    if (argv['c']) {
+      console.log("Attempting to commit changes.");
+
+      commandExists('git', function (err, commandExists) {
+        if (commandExists) {
+          // git tag new_version
+          exec("git add . && git commit -m \"Changing version to " + new_version + "\" && git tag  " + new_version, execCallback);
+        }
+        if (err) {
+          console.error(err);
+        }
+      });
     }
   });
-}
+});
+
 
 function execCallback(error, stdout, stderr) {
     if (error) {
