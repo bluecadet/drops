@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var path = require('path');
 const fs = require('fs');
 const date = require('date-and-time');
@@ -24,10 +26,9 @@ const argv = yargs(hideBin(process.argv))
 const semver = require('semver');
 const { exec } = require("child_process");
 
-console.log(argv);
-
 // Create new text.
-var pjson = require('./package.json');
+let package_path = process.cwd() + "/package.json";
+var pjson = require(package_path);
 const project = pjson.name;
 const now = new Date();
 let current_version = pjson.version;
@@ -98,9 +99,6 @@ if (argv['c']) {
     }
   });
 }
-
-
-
 
 function execCallback(error, stdout, stderr) {
     if (error) {
