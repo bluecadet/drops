@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/bluecadet/drops#readme",
   "dependencies": {
+    "chalk": "^4.1.2",
     "command-exists": "^1.2.9",
     "date-and-time": "^3.0.3",
     "semver": "^7.5.4",
