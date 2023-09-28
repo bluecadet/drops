@@ -132,7 +132,7 @@ Promise.all(writes).then(() => {
             console.log(`\r\nstdout:\r\n${stdout}`);
 
             console.log(chalk.blue("Finished commiting changes"));
-            console.log(chalk.green("\r\nSUCCESS"));
+            console.log(chalk.green("\r\nSUCCESS, enjoy your new version!"));
           });
         }
         if (err) {
@@ -141,7 +141,7 @@ Promise.all(writes).then(() => {
       });
     }
     else {
-      console.log(chalk.green("\r\nSUCCESS"));
+      console.log(chalk.green("\r\nSUCCESS, enjoy your new version!"));
     }
   });
 });
