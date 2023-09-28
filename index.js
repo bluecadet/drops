@@ -85,7 +85,7 @@ infoFiles.forEach((filename) => {
       data = data.substring(0, index) + bldMsg;
     }
 
-    console.log(chalk.yellow("Updateing " + filename + "  ..."));
+    console.log(chalk.yellow("Updating " + filename + "  ..."));
     fs.writeFile(filename, data, { flag: 'w+' }, err => {
       if (err) console.log(err);
     });
@@ -94,7 +94,7 @@ infoFiles.forEach((filename) => {
 });
 
 Promise.all(writes).then(() => {
-  console.log(chalk.yellow("Updateing package.json ..."));
+  console.log(chalk.yellow("Updating package.json ..."));
 
   exec("npm version --allow-same-version --no-commit-hooks --no-git-tag-version " + new_version, (error, stdout, stderr) => {
 
