@@ -25,9 +25,17 @@
   },
   "homepage": "https://github.com/bluecadet/drops#readme",
   "dependencies": {
+    "@bluecadet/bldr": "^1.0.6",
     "chalk": "^4.1.2",
     "command-exists": "^1.2.9",
     "date-and-time": "^3.0.3",
+    "postcss-advanced-variables": "^3.0.1",
+    "postcss-assets": "^6.0.0",
+    "postcss-custom-media": "^10.0.1",
+    "postcss-discard-comments": "^6.0.0",
+    "postcss-easy-import": "^4.0.0",
+    "postcss-nested": "^6.0.1",
+    "postcss-preset-env": "^9.1.4",
     "semver": "^7.5.4",
     "yargs": "^17.7.2"
   }
