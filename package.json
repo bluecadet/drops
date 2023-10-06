@@ -28,6 +28,7 @@
     "@bluecadet/bldr": "^1.0.6",
     "chalk": "^4.1.2",
     "command-exists": "^1.2.9",
+    "concurrently": "^8.2.1",
     "date-and-time": "^3.0.3",
     "postcss-advanced-variables": "^3.0.1",
     "postcss-assets": "^6.0.0",
@@ -36,6 +37,7 @@
     "postcss-easy-import": "^4.0.0",
     "postcss-nested": "^6.0.1",
     "postcss-preset-env": "^9.1.4",
+    "postcss-pxtorem": "^6.0.0",
     "semver": "^7.5.4",
     "yargs": "^17.7.2"
   }
