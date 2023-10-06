@@ -1,6 +1,6 @@
 {
   "name": "@bluecadet/drops",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.5",
   "description": "NodeJS tools to help building Drupal custom modules for Bluecadet.",
   "type": "commonjs",
   "main": "index.js",
