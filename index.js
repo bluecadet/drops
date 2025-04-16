@@ -60,7 +60,7 @@ console.log(chalk.yellow("Setting new Version: " + new_version));
 let bldMsg = "# Information added by packaging script on " + date.format(now, 'YYYY-MM-DD') + "\r\n";
 bldMsg += "version: " + new_version + "\r\n";
 bldMsg += "project: " + project + "\r\n";
-bldMsg += "datestamp: " + Date.now();
+bldMsg += "datestamp: " + Date.now() + "\r\n";
 
 let infoFiles = [];
 fromDir('./', /\.info.yml$/, function(filename) {
