@@ -1,11 +1,14 @@
 {
   "name": "@bluecadet/drops",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "NodeJS tools to help building Drupal custom modules for Bluecadet.",
   "type": "commonjs",
   "main": "index.js",
   "bin": {
     "set-version": "index.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "scripts": {
     "set-version": "node ./index.js",
@@ -25,19 +28,26 @@
   },
   "homepage": "https://github.com/bluecadet/drops#readme",
   "dependencies": {
-    "@bluecadet/bldr": "^1.0.7",
+    "@babel/core": "^7.27.4",
+    "@babel/plugin-external-helpers": "^7.27.1",
+    "@babel/preset-env": "^7.27.2",
+    "@bluecadet/bldr": "^2.0.0-alpha.6",
     "chalk": "^4.1.2",
     "command-exists": "^1.2.9",
     "concurrently": "^8.2.1",
     "date-and-time": "^3.0.3",
-    "postcss-advanced-variables": "^3.0.1",
+    "postcss-advanced-variables": "^5.0.0",
     "postcss-assets": "^6.0.0",
-    "postcss-custom-media": "^10.0.1",
-    "postcss-discard-comments": "^6.0.0",
+    "postcss-calc": "^10.1.1",
+    "postcss-combine-duplicated-selectors": "^10.0.3",
+    "postcss-custom-media": "^11.0.6",
+    "postcss-discard-comments": "^7.0.4",
     "postcss-easy-import": "^4.0.0",
-    "postcss-nested": "^6.0.1",
-    "postcss-preset-env": "^9.1.4",
-    "postcss-pxtorem": "^6.0.0",
+    "postcss-nested": "^7.0.2",
+    "postcss-preset-env": "^10.2.0",
+    "postcss-pxtorem": "^6.1.0",
+    "postcss-strip-inline-comments": "^0.1.5",
+    "postcss-utopia": "^1.1.0",
     "semver": "^7.5.4",
     "yargs": "^17.7.2"
   }
