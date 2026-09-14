@@ -5,13 +5,15 @@
   "type": "commonjs",
   "main": "index.js",
   "bin": {
-    "set-version": "index.js"
+    "set-version": "index.js",
+    "drops-audit": "audit.js"
   },
   "engines": {
     "node": ">=20.0.0"
   },
   "scripts": {
     "set-version": "node ./index.js",
+    "drops-audit": "node ./audit.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "contributors": [
