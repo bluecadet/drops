@@ -53,9 +53,18 @@ let actionNeeded = 0;
 
 leaves.forEach((name) => {
   const v = vulns[name];
-  const pinned = Object.prototype.hasOwnProperty.call(ownDeps, name);
   const fix = v.fixAvailable;
+  // fixAvailable.name is the package that actually needs the version bump,
+  // which is NOT always the same as the vulnerability's own name -- e.g. a
+  // vulnerable transitive postcss is often only fixable by bumping the
+  // *direct* dependent (postcss-advanced-variables) to a new major, not by
+  // pinning postcss itself. Check pinned-ness against whichever package
+  // actually needs to move.
+  const fixPackage = (fix && typeof fix === 'object') ? fix.name : null;
   const fixVersion = (fix && typeof fix === 'object') ? fix.version : null;
+  const fixIsMajor = (fix && typeof fix === 'object') ? fix.isSemVerMajor : false;
+  const target = fixPackage || name;
+  const pinned = Object.prototype.hasOwnProperty.call(ownDeps, target);
   const advisories = v.via.filter((item) => typeof item === 'object');
   const affects = names.filter((other) => other !== name && vulns[other].via.includes(name));
 
@@ -70,33 +79,24 @@ leaves.forEach((name) => {
     console.log(`  Also drags down: ${affects.join(', ')}`);
   }
 
-  if (pinned) {
-    console.log(`  Already pinned directly in package.json as "${ownDeps[name]}".`);
-    if (fixVersion) {
-      console.log(chalk.red(`  A newer version (${fixVersion}) is available -- update the pinned range.`));
-      actionNeeded++;
-    }
-    else if (fix === true) {
-      console.log(chalk.red('  npm reports a fix is available -- run `npm audit fix` and re-check.'));
-      actionNeeded++;
+  if (fixVersion) {
+    const majorNote = fixIsMajor ? ' (major version bump)' : '';
+    if (pinned) {
+      console.log(`  "${target}" is already pinned directly in package.json as "${ownDeps[target]}".`);
+      console.log(chalk.red(`  Update that pin to ^${fixVersion}${majorNote}.`));
     }
     else {
-      console.log(chalk.gray('  No newer version available upstream yet; nothing more to do.'));
+      console.log(`  "${target}" is not directly declared in package.json.`);
+      console.log(chalk.red(`  Consider adding "${target}": "^${fixVersion}"${majorNote} as a new pinned dependency so npm dedupes to the patched version.`));
     }
+    actionNeeded++;
+  }
+  else if (fix === true) {
+    console.log(chalk.red('  npm reports a fix is available -- run `npm audit` for the exact package/version, then pin it.'));
+    actionNeeded++;
   }
   else {
-    console.log('  Purely transitive -- not directly declared in package.json.');
-    if (fixVersion) {
-      console.log(chalk.red(`  Fix available: consider adding "${name}": "^${fixVersion}" as a new pinned dependency so npm dedupes to the patched version.`));
-      actionNeeded++;
-    }
-    else if (fix === true) {
-      console.log(chalk.red('  npm reports a fix is available -- run `npm audit` for the exact version, then pin it as a new dependency.'));
-      actionNeeded++;
-    }
-    else {
-      console.log(chalk.gray('  No fix available upstream yet -- nothing actionable here; track separately.'));
-    }
+    console.log(chalk.gray('  No fix available upstream yet -- nothing actionable here; track separately.'));
   }
 
   console.log('');
