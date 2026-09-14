@@ -120,7 +120,7 @@ Promise.all(writes).then(() => {
       commandExists('git', function (err, commandExists) {
         if (commandExists) {
           // git tag new_version
-          exec("git add . && git commit -m \"Changing version to " + new_version + "\" && git tag  " + new_version, (error, stdout, stderr) => {
+          exec("git add . && git commit -m \"chore(release): bump version to " + new_version + "\" && git tag  " + new_version, (error, stdout, stderr) => {
             if (error) {
               console.log(`\r\nerror:\r\n${error.message}`);
               return;
